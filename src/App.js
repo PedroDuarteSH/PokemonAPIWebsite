@@ -1,24 +1,53 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import pokedex from "./images/pokedex.png";
+import "./App.css";
+import PokemonList from "./Pokemon/PokemonList";
+import PokemonDetails from "./Pokemon/PokemonDetails";
+import { HashRouter, Route, Routes } from "react-router-dom";
+import theme from "./theme";
+import { Typography } from "@mui/material";
 
 function App() {
+  const titlefontSize = theme.typography.h1.fontSize; // Access the fontSize from the theme
+  console.log(titlefontSize);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <HashRouter>
+      <ThemeProvider theme={theme}>
+        <div className="background">
+          <div className="background-image"></div>
+        </div>
+        <div className="App">
+          <div className="App-header">
+            <img
+              src={pokedex}
+              alt="pokedex"
+              className="pokedex"
+              style={{ height: "70px" }}
+            />
+            <Typography variant="h1" component="h1">
+              The Great Pokedex
+            </Typography>
+            <img
+              src={pokedex}
+              alt="pokedex"
+              className="pokedex"
+              style={{
+                height: "70px",
+                paddingRight: "10px",
+                paddingLeft: "10px",
+              }}
+            />
+          </div>
+          <div className="App-body">
+            <Routes>
+              <Route path="/" element={<PokemonList />} />
+              <Route path="/pokemon" element={<PokemonDetails />} />
+            </Routes>
+          </div>
+        </div>
+      </ThemeProvider>
+    </HashRouter>
   );
 }
 
