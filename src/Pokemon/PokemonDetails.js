@@ -1,55 +1,119 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 import "./PokemonDetails.css";
+import { Card, Typography } from "@mui/material";
+import Helpers from "../Helpers";
+import Table from "@mui/material/Table";
+import LinearProgress from "@mui/material/LinearProgress";
+
 function PokemonDetails() {
   const { state } = useLocation();
-  console.log(state);
+  const [images, setImages] = useState(null);
   if (!state || !state.pokemonData) {
-    // Handle the case where state or pokemon is missing
     return <div>No Pokemon data found.</div>;
   }
 
-  const pokemon  = state.pokemonData;
-  console.log(pokemon);
+  const pokemon = state.pokemonData;
+
+  console.log(pokemon.stats);
 
   return (
     <div className="details">
-      <div className="header">
-        <h1>Pokemon Details</h1>
-      </div>
-        <h2>{pokemon.name}</h2>
-        <img src={pokemon.sprites.front_default} alt={pokemon.name} />
-        <img src={pokemon.sprites.back_default} alt={pokemon.name} />
-        <img src={pokemon.sprites.front_shiny} alt={pokemon.name} />
-        <img src={pokemon.sprites.back_shiny} alt={pokemon.name} />
-        <p>Height: {pokemon.height}</p>
-        <p>Weight: {pokemon.weight}</p>
-        <p>Base Experience: {pokemon.base_experience}</p>
-        <p>Abilities:</p>
-        <ul>
-          {pokemon.abilities.map((ability) => {
-            return <li>{ability.ability.name}</li>;
-          })}
-        </ul>
-        <p>Types:</p>
-        <ul>
-          {pokemon.types.map((type) => {
-            return <li>{type.type.name}</li>;
-          })}
-        </ul>
-        <p>Stats:</p>
-        <ul>
-          {pokemon.stats.map((stat) => {
-            return (
-              <li>
-                {stat.stat.name}: {stat.base_stat}
-              </li>
-            );
-          })}
-        </ul>
-        
-    </div>
+      <Card className="details-header">
+        <Typography variant="h2" component="h2">
+          {Helpers.capitalizeFirstLetter(pokemon.name)}
+        </Typography>
+      </Card>
 
+      <Card className="details-images">
+        {pokemon.sprites.other["home"].front_default && (
+          <img
+            src={pokemon.sprites.other["home"].front_default}
+            alt={pokemon.name}
+          />
+        )}
+        {pokemon.sprites.other["official-artwork"].front_default && (
+          <img
+            src={pokemon.sprites.other["official-artwork"].front_default}
+            alt={pokemon.name}
+          />
+        )}
+        {pokemon.sprites.other["official-artwork"].front_shiny && (
+          <img
+            src={pokemon.sprites.other["official-artwork"].front_shiny}
+            alt={pokemon.name}
+          />
+        )}
+
+        {pokemon.sprites.other["home"].front_shiny && (
+          <img
+            src={pokemon.sprites.other["home"].front_shiny}
+            alt={pokemon.name}
+          />
+        )}
+      </Card>
+
+      <Card className="details-stats-card">
+        <Typography variant="h3" component="h3" sx={{ paddingBottom: "20px" }}>
+          Stats
+        </Typography>
+        <div className="details-stats-body">
+          <Typography variant="body2" sx={{ justifySelf: "end" }}>
+            HP
+          </Typography>
+          <LinearProgress
+            variant="determinate"
+            value={pokemon.stats[0].base_stat}
+            sx={{ width: "100px" }}
+          />
+
+          <Typography variant="body2" sx={{ justifySelf: "end" }}>
+            Attack
+          </Typography>
+          <LinearProgress
+            variant="determinate"
+            value={pokemon.stats[1].base_stat}
+            sx={{ width: "100px" }}
+          />
+
+          <Typography variant="body2" sx={{ justifySelf: "end" }}>
+            Defense
+          </Typography>
+          <LinearProgress
+            variant="determinate"
+            value={pokemon.stats[2].base_stat}
+            sx={{ width: "100px" }}
+          />
+
+          <Typography variant="body2" sx={{ justifySelf: "end" }}>
+            Special Attack
+          </Typography>
+          <LinearProgress
+            variant="determinate"
+            value={pokemon.stats[3].base_stat}
+            sx={{ width: "100px" }}
+          />
+
+          <Typography variant="body2" sx={{ justifySelf: "end" }}>
+            Special Defense
+          </Typography>
+          <LinearProgress
+            variant="determinate"
+            value={pokemon.stats[4].base_stat}
+            sx={{ width: "100px" }}
+          />
+
+          <Typography variant="body2" sx={{ justifySelf: "end" }}>
+            Speed
+          </Typography>
+          <LinearProgress
+            variant="determinate"
+            value={pokemon.stats[5].base_stat}
+            sx={{ width: "100px" }}
+          />
+        </div>
+      </Card>
+    </div>
   );
 }
 

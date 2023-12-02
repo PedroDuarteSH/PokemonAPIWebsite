@@ -5,15 +5,10 @@ import PokemonCard from "./PokemonCard";
 import Helpers from "../Helpers";
 
 import {
-  InputLabel,
-  MenuItem,
-  FormControl,
-  Select,
+  Autocomplete,
   TextField,
-  Icon,
   InputAdornment,
   Card,
-  CardHeader,
   Typography,
 } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
@@ -77,7 +72,6 @@ function PokemonList() {
   }
 
   useEffect(() => {
-    console.log("HERE");
     if (renderPokemonList) {
       const offset = (currentPage - 1) * limit;
       setData(renderPokemonList.slice(offset, offset + limit));
@@ -117,55 +111,51 @@ function PokemonList() {
 
   return (
     <div className="list">
-      <Card className="header" sx={{ borderRadius: 10 }}>
-        <Typography variant="h2" component="div" paddingLeft={"30px"}>
+      <Card className="list-header">
+        <Typography variant="h2" component="div" sx={{ paddingLeft: "10px" }}>
           Pokemon List
         </Typography>
 
         <div className="list-header-filter">
-          <FormControl style={{ width: "50%" }} size="small">
-            <InputLabel id="type-select-label">Type</InputLabel>
-            <Select
-              labelId="type-select-label"
-              id="type-select"
-              value={type}
-              label="Type"
-              displayEmpty={true}
-              onChange={(event) => filterByType(event.target.value)}
-              startAdornment={
-                <InputAdornment position="start">
-                  <FilterListIcon />
-                </InputAdornment>
-              }
-            >
-              <MenuItem key={-1} value={null} selected={type === null}>
-                {"All"}
-              </MenuItem>
-
-              {types &&
-                types.map((type, index) => {
-                  return (
-                    <MenuItem key={index} value={type.url}>
-                      {Helpers.capitalizeFirstLetter(type.name)}
-                    </MenuItem>
-                  );
-                })}
-            </Select>
-          </FormControl>
-
+          <Autocomplete
+            sx={{ width: "50%", maxWidth: "20rem", paddingRight: "10px" }}
+            options={types}
+            getOptionLabel={(option) =>
+              Helpers.capitalizeFirstLetter(option.name)
+            }
+            onChange={(event, newValue) =>
+              filterByType(newValue ? newValue.url : null)
+            }
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Type"
+                variant="outlined"
+                size="small"
+                InputProps={{
+                  ...params.InputProps,
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <FilterListIcon />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            )}
+          />
           <TextField
-            id="outlined-basic"
             label="Search"
             variant="outlined"
             onChange={(event) => filterByName(event.target.value)}
-            style={{ width: "50%" }}
+            sx={{ width: "50%", maxWidth: "20rem", }}
             size="small"
             InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
+              startAdornment: (
+                <InputAdornment position="start">
                   <SearchIcon />
                 </InputAdornment>
               ),
+              
             }}
           />
         </div>
@@ -177,16 +167,25 @@ function PokemonList() {
             return <PokemonCard key={index} pokemon={pokemon} />;
           })}
       </div>
-      <div className="list-pagination">
-        <Pagination
-          count={numPages}
-          page={currentPage}
-          variant="outlined"
-          color="primary"
-          size="large"
-          onChange={(event, page) => fetchMoreData(page)}
-        />
-      </div>
+
+      {data.length !== 0 ? (
+        numPages > 1 ? (
+          <Card className="list-pagination">
+            <Pagination
+              count={numPages}
+              page={currentPage}
+              variant="outlined"
+              color="primary"
+              size="large"
+              onChange={(_event, page) => fetchMoreData(page)}
+            />
+          </Card>
+        ) : null
+      ) : (
+        <Typography variant="h2" component="div" sx={{ padding: "20px" }}>
+          No Pokemons Found
+        </Typography>
+      )}
     </div>
   );
 }

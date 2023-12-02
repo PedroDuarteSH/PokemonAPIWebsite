@@ -47,3 +47,27 @@
   box-sizing: border-box;
 }
 
+.pokedex{
+  height: 70px;
+  padding: 0px 20px;
+}
+
+.card {
+  width: 300px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+@media screen and (max-width: 425px) {
+  .App-body {
+    padding: 20px;
+  }
+
+
+  .pokedex {
+    height: 0px;
+  }
+  
+}

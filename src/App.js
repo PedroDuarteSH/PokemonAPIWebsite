@@ -23,7 +23,6 @@ function App() {
               src={pokedex}
               alt="pokedex"
               className="pokedex"
-              style={{ height: "70px" }}
             />
             <Typography variant="h1" component="h1">
               The Great Pokedex
@@ -32,11 +31,7 @@ function App() {
               src={pokedex}
               alt="pokedex"
               className="pokedex"
-              style={{
-                height: "70px",
-                paddingRight: "10px",
-                paddingLeft: "10px",
-              }}
+              
             />
           </div>
           <div className="App-body">
