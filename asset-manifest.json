@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/PokemonAPIWebsite/static/css/main.5d6c2f44.css",
-    "main.js": "/PokemonAPIWebsite/static/js/main.42601d91.js",
+    "main.css": "/PokemonAPIWebsite/static/css/main.da27e78c.css",
+    "main.js": "/PokemonAPIWebsite/static/js/main.cddc244a.js",
     "static/js/787.292bf1a0.chunk.js": "/PokemonAPIWebsite/static/js/787.292bf1a0.chunk.js",
     "static/media/pokedex.png": "/PokemonAPIWebsite/static/media/pokedex.593f10e446015a52bdc6.png",
     "static/media/background.jpg": "/PokemonAPIWebsite/static/media/background.cae487b7ad9e87948dbf.jpg",
     "static/media/Pokemon Hollow.ttf": "/PokemonAPIWebsite/static/media/Pokemon Hollow.47f77ce9939c5330492b.ttf",
     "static/media/Pokemon Solid.ttf": "/PokemonAPIWebsite/static/media/Pokemon Solid.5d60be1f7ff5fcc21fc1.ttf",
     "index.html": "/PokemonAPIWebsite/index.html",
-    "main.5d6c2f44.css.map": "/PokemonAPIWebsite/static/css/main.5d6c2f44.css.map",
-    "main.42601d91.js.map": "/PokemonAPIWebsite/static/js/main.42601d91.js.map",
+    "main.da27e78c.css.map": "/PokemonAPIWebsite/static/css/main.da27e78c.css.map",
+    "main.cddc244a.js.map": "/PokemonAPIWebsite/static/js/main.cddc244a.js.map",
     "787.292bf1a0.chunk.js.map": "/PokemonAPIWebsite/static/js/787.292bf1a0.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.5d6c2f44.css",
-    "static/js/main.42601d91.js"
+    "static/css/main.da27e78c.css",
+    "static/js/main.cddc244a.js"
   ]
 }
