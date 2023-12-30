@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/PokemonAPIWebsite/static/css/main.da791317.css",
+    "main.css": "/PokemonAPIWebsite/static/css/main.d414791e.css",
     "main.js": "/PokemonAPIWebsite/static/js/main.ff367b81.js",
     "static/js/787.292bf1a0.chunk.js": "/PokemonAPIWebsite/static/js/787.292bf1a0.chunk.js",
     "static/media/pokedex.png": "/PokemonAPIWebsite/static/media/pokedex.593f10e446015a52bdc6.png",
@@ -8,12 +8,12 @@
     "static/media/Pokemon Hollow.ttf": "/PokemonAPIWebsite/static/media/Pokemon Hollow.47f77ce9939c5330492b.ttf",
     "static/media/Pokemon Solid.ttf": "/PokemonAPIWebsite/static/media/Pokemon Solid.5d60be1f7ff5fcc21fc1.ttf",
     "index.html": "/PokemonAPIWebsite/index.html",
-    "main.da791317.css.map": "/PokemonAPIWebsite/static/css/main.da791317.css.map",
+    "main.d414791e.css.map": "/PokemonAPIWebsite/static/css/main.d414791e.css.map",
     "main.ff367b81.js.map": "/PokemonAPIWebsite/static/js/main.ff367b81.js.map",
     "787.292bf1a0.chunk.js.map": "/PokemonAPIWebsite/static/js/787.292bf1a0.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.da791317.css",
+    "static/css/main.d414791e.css",
     "static/js/main.ff367b81.js"
   ]
 }
