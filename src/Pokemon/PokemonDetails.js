@@ -15,11 +15,11 @@ function PokemonDetails() {
 
   const pokemon = state.pokemonData;
 
-  console.log(pokemon.stats);
+  console.log(pokemon);
 
   return (
     <div className="details">
-      <Card className="details-header">
+      <Card className="details-card details-header">
         <Typography variant="h2" component="h2">
           {Helpers.capitalizeFirstLetter(pokemon.name)}
         </Typography>
@@ -53,7 +53,7 @@ function PokemonDetails() {
         )}
       </Card>
 
-      <Card className="details-stats-card">
+      <Card className="details-card">
         <Typography variant="h3" component="h3" sx={{ paddingBottom: "20px" }}>
           Stats
         </Typography>
@@ -111,6 +111,31 @@ function PokemonDetails() {
             value={pokemon.stats[5].base_stat}
             sx={{ width: "100px" }}
           />
+        </div>
+      </Card>
+      <Card className="details-card">
+        <Typography variant="h3" component="h3" sx={{ paddingBottom: "20px" }}>
+          Abilities
+        </Typography>
+        <div className="details-abilities-body">
+          {pokemon.abilities.map((ability) => (
+            <Typography variant="body2" sx={{ justifySelf: "center"}}>
+              {Helpers.capitalizeFirstLetter(ability.ability.name)}
+            </Typography>
+          ))}
+        </div>
+      </Card>
+
+      <Card className="details-card">
+        <Typography variant="h3" component="h3" sx={{ paddingBottom: "20px" }}>
+          Moves
+        </Typography>
+        <div className="details-moves-body">
+          {pokemon.moves.map((move) => (
+            <Typography variant="body2" sx={{ justifySelf: "center" }}>
+              {Helpers.capitalizeFirstLetter(move.move.name)}
+            </Typography>
+          ))}
         </div>
       </Card>
     </div>

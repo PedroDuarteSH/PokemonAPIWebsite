@@ -16,6 +16,7 @@ function PokemonCard({ pokemon }) {
 
   const navigate = useNavigate();
   useEffect(() => {
+    setLoading(true);
     if (pokemon !== null) {
       PokemonAPI.fetchUrl(pokemon.url)
         .then((result) => {

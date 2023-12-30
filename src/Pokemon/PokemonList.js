@@ -10,9 +10,14 @@ import {
   InputAdornment,
   Card,
   Typography,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
 import FilterListIcon from "@mui/icons-material/FilterList";
+import { SortByAlpha } from "@mui/icons-material";
 import SearchIcon from "@mui/icons-material/Search";
 
 function PokemonList() {
@@ -29,6 +34,9 @@ function PokemonList() {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [type, setType] = useState(null);
+
+  const [sort, setSort] = useState("");
+  const [forceRender, setForceRender] = useState(false);
 
   useEffect(() => {
     getPokemonTypesList();
@@ -72,13 +80,19 @@ function PokemonList() {
   }
 
   useEffect(() => {
+    if(forceRender){
+      setForceRender(false);
+    }
+
     if (renderPokemonList) {
+  
       const offset = (currentPage - 1) * limit;
       setData(renderPokemonList.slice(offset, offset + limit));
     } else {
       getData();
     }
-  }, [currentPage, renderPokemonList]);
+  
+  }, [currentPage, renderPokemonList, forceRender]);
 
   useEffect(() => {
     setRenderPokemonList(null);
@@ -109,6 +123,34 @@ function PokemonList() {
     return <p>Loading...</p>;
   }
 
+  const sortByName = (e) => {
+    console.log(e);
+    setSort(e);
+
+    if(e === ""){
+      setRenderPokemonList(tempList);
+      setCurrentPage(1);
+      setForceRender(true);
+      return;
+    }
+
+    console.log(tempList);
+    if (e === "up") {
+      var sortedList = renderPokemonList.sort((a, b) => {
+      return a.name.localeCompare(b.name);
+    });
+    } else if (e === "down") {
+      sortedList = renderPokemonList.sort((a, b) => {
+      return b.name.localeCompare(a.name);
+    });
+  }
+    
+    setRenderPokemonList(sortedList);
+    setCurrentPage(1);
+    setNumPages(Math.ceil(sortedList.length / limit));
+    setForceRender(true);
+  }
+
   return (
     <div className="list">
       <Card className="list-header">
@@ -117,15 +159,43 @@ function PokemonList() {
         </Typography>
 
         <div className="list-header-filter">
+          <FormControl
+          className="list-header-filter-item"
+          size="small"
+          
+          >
+            <InputLabel id="demo-simple-select-label">Sort</InputLabel>
+            <Select
+              
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              label="Sort"
+              value={sort}
+              onChange={(event) => sortByName(event.target.value)}
+              startAdornment={
+                <InputAdornment position="start">
+                  <SortByAlpha />
+                </InputAdornment>
+              }
+              
+            >
+              <MenuItem value={""}></MenuItem>
+              <MenuItem value={"up"}>Ascending</MenuItem>
+              <MenuItem value={"down"}>Descending</MenuItem>
+            </Select>
+          </FormControl>
+
           <Autocomplete
-            sx={{ width: "50%", maxWidth: "20rem", paddingRight: "10px" }}
+            className="list-header-filter-item"
             options={types}
+            size="small"
             getOptionLabel={(option) =>
               Helpers.capitalizeFirstLetter(option.name)
             }
             onChange={(event, newValue) =>
               filterByType(newValue ? newValue.url : null)
             }
+
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -146,8 +216,9 @@ function PokemonList() {
           <TextField
             label="Search"
             variant="outlined"
+            sx={{ minWidth: "100px" }}
             onChange={(event) => filterByName(event.target.value)}
-            sx={{ width: "50%", maxWidth: "20rem", }}
+            className="list-header-filter-item"
             size="small"
             InputProps={{
               startAdornment: (
@@ -155,7 +226,6 @@ function PokemonList() {
                   <SearchIcon />
                 </InputAdornment>
               ),
-              
             }}
           />
         </div>

@@ -28,7 +28,7 @@ const PokemonAPI = {
         "pokemon",
         "?limit=" + limit + "&offset=" + offset
       );
-      console.log(result);
+    
       return { pokemons: result.results, numPokemons: result.count };
     } catch (error) {
       console.error("Error fetching data:", error.message);
